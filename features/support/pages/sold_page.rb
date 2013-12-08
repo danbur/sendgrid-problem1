@@ -1,12 +1,10 @@
+require "rspec/expectations"
 require "./features/support/pages/common_search_page"
 
 class SoldPage < CommonSearchPage
-  def initialize(driver)
-    super(driver)
-  end
-
-  def verify_base_elements
+  def wait_for_page_to_load
     wait_until { sold_active }
+    self
   end
 
   private

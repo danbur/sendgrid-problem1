@@ -1,14 +1,19 @@
-class Page
-  BASE_ELEMENT_TIMEOUT = 10
+require "./features/support/configuration"
 
+class Page
   def initialize(driver)
     @driver = driver
   end
 
   private
 
+  def expect(value)
+    RSpec::Matchers::expect(value)
+  end
+
   def wait_until
-    wait = Selenium::WebDriver::Wait.new(:timeout => BASE_ELEMENT_TIMEOUT)
+    wait = Selenium::WebDriver::Wait.new(:timeout => \
+                                         Configuration::BASE_ELEMENT_TIMEOUT)
     wait.until { yield }
   end
 

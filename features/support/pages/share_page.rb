@@ -1,14 +1,12 @@
+require "rspec/expectations"
 require "./features/support/pages/common_search_page"
 
 class SharePage < CommonSearchPage
-  def initialize(driver)
-    super(driver)
+  def wait_for_page_to_load
+    wait_until { share_active }
+    self
   end
   
-  def verify_base_elements
-    wait_for_element { share_active }
-  end
-
   private
 
   def share_active

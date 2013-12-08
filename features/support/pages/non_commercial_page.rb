@@ -21,6 +21,11 @@ class NonCommercialPage < Page
     SoldPage.new(@driver)
   end
 
+  def click_new_homes_link
+    new_homes_link.click
+    NewHomesPage.new(@driver)
+  end
+
   private
 
   def rent_link
@@ -37,5 +42,9 @@ class NonCommercialPage < Page
 
   def sold_link
     @driver.find_element(:css, '.sold a span');
+  end
+
+  def new_homes_link
+    @driver.find_element(:css, '.new_homes a span');
   end
 end

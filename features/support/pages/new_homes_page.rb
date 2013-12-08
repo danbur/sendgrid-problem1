@@ -1,14 +1,13 @@
 require "./features/support/pages/common_search_page"
 
-class SoldPage < CommonSearchPage
-  def initialize(driver)
-    super(driver)
-    wait_for_element { sold_active }
+class NewHomesPage < CommonSearchPage
+  def wait_for_page_to_load
+    wait_until { new_homes_active }
   end
 
   private
 
-  def sold_active
-    @driver.find_element(:css, ".sold.rui-nav-active")
+  def new_homes_active
+    @driver.find_element(:css, ".new_homes.rui-nav-active")
   end
 end

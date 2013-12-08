@@ -1,61 +1,57 @@
 Given /^I am on the realestate.com.au page$/ do
   @driver.get "http://www.realestate.com.au"
-  @page = BuyPage.new(@driver)
-  @page.verify_base_elements
+  @buy_page = @page = BuyPage.new(@driver)
+  @page.wait_for_page_to_load
 end
 
 When /^I click on the Buy header link$/ do
-  @page = @page.click_buy_link
+  @buy_page = @page = @page.click_buy_link
 end
 
 Then /^the Buy page should display$/ do
-  @page.verify_base_elements
-  expect(@page.search_headline_text).to \
-      eq("Find more properties on Australia's no. 1 property site")
+  @buy_page.wait_for_page_to_load
+  expect(@buy_page.search_headline_text).to \
+  eq("Find more properties on Australia's no. 1 property site")
 end
 
 When /^I click on the Rent header link$/ do
-  @page = @page.click_rent_link
+  @rent_page = @page = @page.click_rent_link
 end
 
 Then /^the Rent page should display$/ do
-  @page.verify_base_elements
-  expect(@page.search_headline_text).to \
-      eq("Find rental properties on Australia's no. 1 property site")
+  @rent_page.wait_for_page_to_load
+  expect(@rent_page.search_headline_text).to \
+  eq("Find rental properties on Australia's no. 1 property site")
 end
 
-When /^I Click on the Share header link$/ do
-  @page = @page.click_share_link
+When /^I click on the Share header link$/ do
+  @share_page = @page = @page.click_share_link
 end
 
 Then /^the Share page should display$/ do
-  @page.verify_base_elements
-  expect(@page.search_hero_message_text.downcase).to \
-      eq("Finding that perfect roommate just got easier".downcase)
+  @share_page.wait_for_page_to_load
+  expect(@share_page.search_hero_message_text.downcase).to \
+  eq("Finding that perfect roommate just got easier".downcase)
 end
   
 When /^I click on the Sold header link$/ do
-  @page = @page.click_sold_link
+  @sold_page = @page = @page.click_sold_link
 end
 
 Then /^the Sold page should display$/ do
-  @page.verify_base_elements
-  expect(@page.search_headline_text).to \
-      eq("Find sold properties on Australia's no. 1 property site")
+  @sold_page.wait_for_page_to_load
+  expect(@sold_page.search_headline_text).to \
+  eq("Find sold properties on Australia's no. 1 property site")
 end
 
 When /^I click on the New Homes header link$/ do
-  @page = @page.click_new_homes_link
+  @new_homes_page = @page.click_new_homes_link
 end
 
 Then /^the New Homes page should display$/ do
-  @page.verify_base_elements
-  expect(@page.search_headline_text).to \
-      eq("Find new home designs on Australia's no. 1 property site")
-end
-
-When(/^I click on the Share header link$/) do
-  pending # express the regexp above with the code you wish you had
+  @new_homes_page.wait_for_page_to_load.verify_base_elements
+  expect(@new_homes_page.search_headline_text).to \
+  eq("Find new home designs on Australia's no. 1 property site")
 end
 
 When(/^I click on the Retire header link$/) do
