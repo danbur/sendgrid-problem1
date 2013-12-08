@@ -31,6 +31,11 @@ class NonCommercialPage < Page
     RetirePage.new(@driver)
   end
 
+  def click_find_agents_link
+    find_agents_link.click
+    FindAgentsPage.new(@driver)
+  end
+
   private
 
   def rent_link
@@ -55,5 +60,9 @@ class NonCommercialPage < Page
 
   def retire_link
     @driver.find_element(:css, '.retire a span')
+  end
+
+  def find_agents_link
+    @driver.find_element(:css, '.agent a span')
   end
 end

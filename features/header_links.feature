@@ -33,6 +33,11 @@ Scenario: Retire header link
   When I click on the Retire header link
   Then the Retire page should display
 
+Scenario: Find Agents header link
+  Given I am on the realestate.com.au page
+  When I click on the Find Agents header link
+  Then the Find Agents page should display
+
 Scenario: Click through all header links
   Given I am on the realestate.com.au page
   When I click on the Buy header link

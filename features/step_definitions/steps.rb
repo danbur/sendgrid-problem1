@@ -69,11 +69,13 @@ Then(/^the Retire page should display$/) do
 end
 
 When(/^I click on the Find Agents header link$/) do
-  pending # express the regexp above with the code you wish you had
+  @find_agents_page = @page = @page.click_find_agents_link
 end
 
 Then(/^the Find Agents page should display$/) do
-  pending # express the regexp above with the code you wish you had
+  @find_agents_page.wait_for_page_to_load
+  expect(@find_agents_page.search_headline_text).to \
+  eq("Find real estate agents on Australia's no. 1 property site")
 end
 
 When(/^I click on the Home Ideas header link$/) do
