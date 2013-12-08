@@ -1,7 +1,8 @@
 Given /^I am on the realestate.com.au page$/ do
   @driver.get "http://www.realestate.com.au"
-  @buy_page = @page = BuyPage.new(@driver)
+  @page = NonCommercialPage.new(@driver)
   @page.wait_for_page_to_load
+  expect(@page.header_logo_hover_text).to eq ("realestate.com.au homepage")
 end
 
 When /^I click on the Buy header link$/ do
@@ -50,12 +51,13 @@ end
 
 Then /^the New Homes page should display$/ do
   @new_homes_page.wait_for_page_to_load
-  sub_nav_links_text = @new_homes_page.sub_nav_links_text
-  expect(sub_nav_links_text.length).to eq(4)
-  expect(sub_nav_links_text[0]).to eq("New Apartments")
-  expect(sub_nav_links_text[1]).to eq("Land Estates")
-  expect(sub_nav_links_text[2]).to eq("House and Land Packages")
-  expect(sub_nav_links_text[3]).to eq("Home Designs")
+  links_text = @new_homes_page.sub_nav_links_text
+  expect(links_text.length).to eq(4), \
+  "Expecting 4 sub nav links, found #{links_text.length}"
+  expect(links_text[0]).to eq("New Apartments")
+  expect(links_text[1]).to eq("Land Estates")
+  expect(links_text[2]).to eq("House and Land Packages")
+  expect(links_text[3]).to eq("Home Designs")
 end
 
 When(/^I click on the Retire header link$/) do
@@ -89,17 +91,32 @@ Then(/^the Home Ideas page should display$/) do
 end
 
 When(/^I click on the Blog header link$/) do
-  pending # express the regexp above with the code you wish you had
+  @blog_page = @page = @page.click_blog_link
 end
 
 Then(/^the Blog page should display$/) do
-  pending # express the regexp above with the code you wish you had
+  @blog_page.wait_for_page_to_load
+  links_text = @blog_page.category_links_text
+  expect(links_text.size).to eq(6), \
+  "Expecting 6 category links, found #{links_text.size}"
+  expect(links_text[0]).to match(/Home/i)
+  expect(links_text[1]).to match(/News/i)
+  expect(links_text[2]).to match(/Tips & Guides/i)
+  expect(links_text[3]).to match(/Finance/i)
+  expect(links_text[4]).to match(/Inspiration/i)
+  expect(links_text[5]).to match(/Lifestyle/i)
 end
 
 When(/^I click on the Commerical header link$/) do
-  pending # express the regexp above with the code you wish you had
+  @commercial_page = @page.click_commercial_link
 end
 
 Then(/^the Commercial page should open in a new window$/) do
-  pending # express the regexp above with the code you wish you had
+  wait = Selenium::WebDriver::Wait.new(:timeout => \
+                                         Configuration::TIMEOUT)
+  wait.until { @driver.window_handles.size > 1 }
+  @driver.switch_to.window(@driver.window_handles.last)
+  @commercial_page.wait_for_page_to_load
+  expect(@commercial_page.header_logo_hover_text).to \
+  eq("realcommercial.com.au homepage")
 end

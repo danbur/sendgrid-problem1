@@ -13,7 +13,7 @@ class Page
 
   def wait_until
     wait = Selenium::WebDriver::Wait.new(:timeout => \
-                                         Configuration::BASE_ELEMENT_TIMEOUT)
+                                         Configuration::TIMEOUT)
     wait.until { yield }
   end
 

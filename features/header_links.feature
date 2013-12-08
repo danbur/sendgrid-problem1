@@ -43,6 +43,16 @@ Scenario: Home Ideas header link
   When I click on the Home Ideas header link
   Then the Home Ideas page should display
 
+Scenario: Blog header link
+  Given I am on the realestate.com.au page
+  When I click on the Blog header link
+  Then the Blog page should display
+
+Scenario: Commercial header link
+  Given I am on the realestate.com.au page
+  When I click on the Commerical header link
+  Then the Commercial page should open in a new window
+
 Scenario: Click through all header links
   Given I am on the realestate.com.au page
   When I click on the Buy header link

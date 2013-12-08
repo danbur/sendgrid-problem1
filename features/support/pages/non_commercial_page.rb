@@ -1,6 +1,14 @@
 require "./features/support/pages/page.rb"
 
 class NonCommercialPage < Page
+  def wait_for_page_to_load
+    wait_until { header_logo }
+  end
+
+  def header_logo_hover_text
+    header_logo.attribute("title")
+  end
+
   def click_buy_link
     buy_link.click
     BuyPage.new(@driver)
@@ -41,7 +49,21 @@ class NonCommercialPage < Page
     HomeIdeasPage.new(@driver)
   end
 
+  def click_blog_link
+    blog_link.click
+    BlogPage.new(@driver)
+  end
+
+  def click_commercial_link
+    commercial_link.click
+    CommercialPage.new(@driver)
+  end
+
   private
+
+  def header_logo
+    @driver.find_element(:css, 'header .rui-main-logo')
+  end
 
   def rent_link
     @driver.find_element(:css, '.rent a span')
@@ -60,7 +82,7 @@ class NonCommercialPage < Page
   end
 
   def new_homes_link
-    @driver.find_element(:css, '.new_homes a span')
+    @driver.find_element(:css, '.new_homes a span, .new-homes a span')
   end
 
   def retire_link
@@ -73,5 +95,13 @@ class NonCommercialPage < Page
 
   def home_ideas_link
     @driver.find_element(:css, '.home_ideas a span')
+  end
+
+  def blog_link
+    @driver.find_element(:css, '.blog a span')
+  end
+
+  def commercial_link
+    @driver.find_element(:css, '.commercial a span')
   end
 end

@@ -2,6 +2,7 @@ require "./features/support/pages/common_search_page"
 
 class NewHomesPage < CommonSearchPage
   def wait_for_page_to_load
+    super
     wait_until { new_homes_active }
   end
 
@@ -12,7 +13,8 @@ class NewHomesPage < CommonSearchPage
   private
 
   def new_homes_active
-    @driver.find_element(:css, ".new_homes.rui-nav-active")
+    @driver.find_element(:css, ".new-homes.rui-nav-active, "\
+                         ".new_homes.rui-nav-active")
   end
 
   def sub_nav_links
