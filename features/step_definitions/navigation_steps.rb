@@ -5,14 +5,18 @@ Given /^I am on the realestate.com.au page$/ do
   expect(@page.header_logo_hover_text).to eq ("realestate.com.au homepage")
 end
 
+Given(/^I am on the Buy page$/) do
+  @driver.get "http://www.realestate.com.au/buy"
+  @buy_page = @page = BuyPage.new(@driver)
+  verify_buy_page_displays
+end
+
 When /^I click on the Buy header link$/ do
   @buy_page = @page = @page.click_buy_link
 end
 
 Then /^the Buy page should display$/ do
-  @buy_page.wait_for_page_to_load
-  expect(@buy_page.search_headline_text).to \
-  eq("Find more properties on Australia's no. 1 property site")
+  verify_buy_page_displays
 end
 
 When /^I click on the Rent header link$/ do
@@ -121,6 +125,12 @@ end
 
 Then(/^the Commercial page should display$/) do
   verify_commercial_page_displays
+end
+
+def verify_buy_page_displays
+  @buy_page.wait_for_page_to_load
+  expect(@buy_page.search_headline_text).to \
+  eq("Find more properties on Australia's no. 1 property site")
 end
 
 def verify_commercial_page_displays

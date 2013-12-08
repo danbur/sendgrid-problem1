@@ -7,9 +7,22 @@ class BuyPage < CommonSearchPage
     self
   end
 
+  def select_state(state)
+    area_for_state(state).click
+    wait_until { suburb_select.displayed? }
+  end
+
   private
 
   def buy_active
     @driver.find_element(:css, ".buy.rui-nav-active")
+  end
+
+  def area_for_state(state)
+    @driver.find_element(:css, ".searchForm area#area_" + state)
+  end
+
+  def suburb_select
+    @driver.find_element(:css, ".searchForm select#suburbSelect")
   end
 end
