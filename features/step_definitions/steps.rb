@@ -116,6 +116,14 @@ Then(/^the Commercial page should open in a new window$/) do
                                          Configuration::TIMEOUT)
   wait.until { @driver.window_handles.size > 1 }
   @driver.switch_to.window(@driver.window_handles.last)
+  verify_commercial_page_displays
+end
+
+Then(/^the Commercial page should display$/) do
+  verify_commercial_page_displays
+end
+
+def verify_commercial_page_displays
   @commercial_page.wait_for_page_to_load
   expect(@commercial_page.header_logo_hover_text).to \
   eq("realcommercial.com.au homepage")

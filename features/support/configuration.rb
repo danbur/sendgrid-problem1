@@ -1,3 +1,3 @@
 class Configuration
-    TIMEOUT = 30
+    TIMEOUT = 60
 end

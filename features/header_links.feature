@@ -74,5 +74,5 @@ Scenario: Click through all header links
   When I click on the Blog header link
   Then the Blog page should display
   When I click on the Commerical header link
-  Then the Commercial page should open in a new window
+  Then the Commercial page should display
 
