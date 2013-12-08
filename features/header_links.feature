@@ -38,6 +38,11 @@ Scenario: Find Agents header link
   When I click on the Find Agents header link
   Then the Find Agents page should display
 
+Scenario: Home Ideas header link
+  Given I am on the realestate.com.au page
+  When I click on the Home Ideas header link
+  Then the Home Ideas page should display
+
 Scenario: Click through all header links
   Given I am on the realestate.com.au page
   When I click on the Buy header link

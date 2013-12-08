@@ -36,6 +36,11 @@ class NonCommercialPage < Page
     FindAgentsPage.new(@driver)
   end
 
+  def click_home_ideas_link
+    home_ideas_link.click
+    HomeIdeasPage.new(@driver)
+  end
+
   private
 
   def rent_link
@@ -64,5 +69,9 @@ class NonCommercialPage < Page
 
   def find_agents_link
     @driver.find_element(:css, '.agent a span')
+  end
+
+  def home_ideas_link
+    @driver.find_element(:css, '.home_ideas a span')
   end
 end

@@ -79,11 +79,13 @@ Then(/^the Find Agents page should display$/) do
 end
 
 When(/^I click on the Home Ideas header link$/) do
-  pending # express the regexp above with the code you wish you had
+  @home_ideas_page = @page = @page.click_home_ideas_link
 end
 
 Then(/^the Home Ideas page should display$/) do
-  pending # express the regexp above with the code you wish you had
+  @home_ideas_page.wait_for_page_to_load
+  expect(@home_ideas_page.home_ideas_logo_hover_text).to \
+  eq("Home Ideas Home Page")
 end
 
 When(/^I click on the Blog header link$/) do
