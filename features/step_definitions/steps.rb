@@ -49,9 +49,13 @@ When /^I click on the New Homes header link$/ do
 end
 
 Then /^the New Homes page should display$/ do
-  @new_homes_page.wait_for_page_to_load.verify_base_elements
-  expect(@new_homes_page.search_headline_text).to \
-  eq("Find new home designs on Australia's no. 1 property site")
+  @new_homes_page.wait_for_page_to_load
+  sub_nav_links_text = @new_homes_page.sub_nav_links_text
+  expect(sub_nav_links_text.length).to eq(4)
+  expect(sub_nav_links_text[0]).to eq("New Apartments")
+  expect(sub_nav_links_text[1]).to eq("Land Estates")
+  expect(sub_nav_links_text[2]).to eq("House and Land Packages")
+  expect(sub_nav_links_text[3]).to eq("Home Designs")
 end
 
 When(/^I click on the Retire header link$/) do
