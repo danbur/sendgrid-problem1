@@ -26,25 +26,34 @@ class NonCommercialPage < Page
     NewHomesPage.new(@driver)
   end
 
+  def click_retire_link
+    retire_link.click
+    RetirePage.new(@driver)
+  end
+
   private
 
   def rent_link
-    @driver.find_element(:css, '.rent a span');
+    @driver.find_element(:css, '.rent a span')
   end
 
   def buy_link
-    @driver.find_element(:css, '.buy a span');
+    @driver.find_element(:css, '.buy a span')
   end
 
   def share_link
-    @driver.find_element(:css, '.share a span');
+    @driver.find_element(:css, '.share a span')
   end
 
   def sold_link
-    @driver.find_element(:css, '.sold a span');
+    @driver.find_element(:css, '.sold a span')
   end
 
   def new_homes_link
-    @driver.find_element(:css, '.new_homes a span');
+    @driver.find_element(:css, '.new_homes a span')
+  end
+
+  def retire_link
+    @driver.find_element(:css, '.retire a span')
   end
 end

@@ -1,4 +1,3 @@
-require "rspec/expectations"
 require "./features/support/pages/common_search_page"
 
 class SoldPage < CommonSearchPage

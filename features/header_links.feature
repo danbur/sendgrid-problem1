@@ -28,6 +28,11 @@ Scenario: New Homes header link
   When I click on the New Homes header link
   Then the New Homes page should display
 
+Scenario: Retire header link
+  Given I am on the realestate.com.au page
+  When I click on the Retire header link
+  Then the Retire page should display
+
 Scenario: Click through all header links
   Given I am on the realestate.com.au page
   When I click on the Buy header link

@@ -30,8 +30,8 @@ end
 
 Then /^the Share page should display$/ do
   @share_page.wait_for_page_to_load
-  expect(@share_page.search_hero_message_text.downcase).to \
-  eq("Finding that perfect roommate just got easier".downcase)
+  expect(@share_page.search_hero_message_text).to \
+  match(/Finding that perfect roommate just got easier/i)
 end
   
 When /^I click on the Sold header link$/ do
@@ -59,11 +59,13 @@ Then /^the New Homes page should display$/ do
 end
 
 When(/^I click on the Retire header link$/) do
-  pending # express the regexp above with the code you wish you had
+  @retire_page = @page = @page.click_retire_link
 end
 
 Then(/^the Retire page should display$/) do
-  pending # express the regexp above with the code you wish you had
+  @retire_page.wait_for_page_to_load
+  expect(@retire_page.search_hero_message_text).to \
+  match(/Choose the lifestyle that's right for you/i)
 end
 
 When(/^I click on the Find Agents header link$/) do
