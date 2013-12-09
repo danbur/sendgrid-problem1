@@ -58,12 +58,7 @@ class BuyPage < CommonSearchPage
   end
 
   def suburb_option(suburb)
-    @driver.find_elements(:css, "#suburbSelect option").each do |option|
-      if (option.text == suburb)
-        return option
-      end
-    end
-    raise "Suburb #{suburb} not present in the suburb selection list"
+    @driver.find_element(:xpath, "//select[@id='suburbSelect']/option[text()='#{suburb}']")
   end
 
   def region_entry
