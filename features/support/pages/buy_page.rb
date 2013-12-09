@@ -58,7 +58,8 @@ class BuyPage < CommonSearchPage
   end
 
   def suburb_option(suburb)
-    @driver.find_element(:xpath, "//select[@id='suburbSelect']/option[text()='#{suburb}']")
+    @driver.find_element(:xpath, "//select[@id='suburbSelect']/"\
+                         "option[text()='#{suburb}']")
   end
 
   def region_entry
@@ -75,13 +76,8 @@ class BuyPage < CommonSearchPage
 
   # Returns the drop-down label for the specified property type
   def property_type_label(type)
-    labels = @driver.find_elements(:css, "#LMIDD_state_propertyType label")
-    labels.each do |label|
-      if (label.text == type)
-        return label
-      end
-    end
-    raise "Property type #{type} not found in drop-down list"
+    @driver.find_element(:xpath, "//*[@id='LMIDD_state_propertyType']//"\
+                         "label[text()='#{type}']")
   end
 
   def maximum_price_entry
@@ -94,13 +90,8 @@ class BuyPage < CommonSearchPage
 
   # Returns the drop-down label for a specified maximum price
   def maximum_price_label(price)
-    labels = @driver.find_elements(:css, "#LMIDD_state_maxPrice dd")
-    labels.each do |label|
-      if (label.text == price)
-        return label
-      end
-    end
-    raise "Maximum price #{price} not found in drop-down list"
+    @driver.find_element(:xpath, "//*[@id='LMIDD_state_maxPrice']//"\
+                         "dd[text()='#{price}']")
   end
 
   def search_button
