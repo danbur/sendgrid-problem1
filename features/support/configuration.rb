@@ -1,3 +1,6 @@
 class Configuration
-    TIMEOUT = 60
+  # Timeout when waiting for elements, in seconds
+  TIMEOUT = 60
+  # The expected number of search results for the test
+  NUMBER_OF_RESULTS = 1035
 end
