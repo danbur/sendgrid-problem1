@@ -10,11 +10,16 @@ class BuyPage < CommonSearchPage
   def select_state(state)
     area_for_state(state).click
     wait_until { suburb_options_present }
+    wait_until { suburb_options.first.selected? }
     self
   end
 
   def select_suburb(suburb)
-    suburb_option(suburb).click
+    region_entry.click
+    region_entry.clear
+    region_entry.send_keys(suburb)
+    wait_until { !suburb_options.first.selected? }
+
     if (include_surrounding.selected?)
       include_surrounding.click
     end
@@ -57,8 +62,12 @@ class BuyPage < CommonSearchPage
     @driver.find_element(:css, "#suburbSelect option")
   end
 
+  def suburb_options
+    @driver.find_elements(:css, "#suburbSelect option")
+  end
+
   def suburb_option(suburb)
-    @driver.find_elements(:css, "#suburbSelect option").each do |option|
+    suburb_options.each do |option|
       if (option.text == suburb)
         return option
       end
