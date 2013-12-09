@@ -9,14 +9,15 @@ class BuyPage < CommonSearchPage
 
   def select_state(state)
     area_for_state(state).click
-    wait_until { suburb_select.displayed? }
+    wait_until { suburb_options_present }
     self
   end
 
   def select_suburb(suburb)
-    region_entry.click
-    region_entry.clear
-    region_entry.send_keys(suburb)
+    suburb_option(suburb).click
+    if (include_surrounding.selected?)
+      include_surrounding.click
+    end
     self
   end
 
@@ -52,8 +53,17 @@ class BuyPage < CommonSearchPage
     @driver.find_element(:css, ".searchForm area#area_" + state)
   end
 
-  def suburb_select
-    @driver.find_element(:id, "suburbSelect")
+  def suburb_options_present
+    @driver.find_element(:css, "#suburbSelect option")
+  end
+
+  def suburb_option(suburb)
+    @driver.find_elements(:css, "#suburbSelect option").each do |option|
+      if (option.text == suburb)
+        return option
+      end
+    end
+    raise "Suburb #{suburb} not present in the suburb selection list"
   end
 
   def region_entry
@@ -100,5 +110,9 @@ class BuyPage < CommonSearchPage
 
   def search_button
     @driver.find_element(:id, "state_searchBtnState")
+  end
+
+  def include_surrounding
+    @driver.find_element(:id, "state_includeSurrounding")
   end
 end
